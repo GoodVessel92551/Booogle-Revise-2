@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}New{% endblock %}
+{% block main %}
+    <main class="main">
+        <h1>New Question</h1>
+        <a href="/new" class="main_button next" style="position:absolute;top:34.5px;right:0px;">Next<ion-icon name="arrow-forward-outline"></ion-icon></a>
+        <a href="/new" class="main_button second_button" style="position:absolute;top:34.5px;right:118.64px;">Finish<ion-icon name="checkmark-done-outline"></ion-icon></a>
+        <input placeholder="Question" required class="new_title text">
+        <div id="answers">
+            <textarea id="ans1" required placeholder="Answer" class="text new_answer"></textarea>
+        </div>
+        <button onclick="new_ans()" id="new_ans_but" style="float:right;" class="main_button">New Answer<ion-icon name="add-outline"></ion-icon></button>
+        <button onclick="new_ans_false()" id="new_ans_but_false" style="float:right;margin-right:8px;" class="main_button second_button">New False Answer<ion-icon name="add-outline"></ion-icon></button>
+        <button onclick="new_ans_del()" id="new_ans_but_del" style="display:none;float:right;margin-right:8px;" class="main_button del_button">Delete Last Answer<ion-icon name="trash-outline"></ion-icon></button>
+    </main>
+<script>
+    function new_ans() {
+        var list = document.querySelectorAll(".new_answer")
+        if (list.length < 3){
+            var amount = list.length + 1
+            document.getElementById("new_ans_but_del").style.display = "block"
+            if(amount == 3){
+                document.getElementById("new_ans_but").disabled = true
+                document.getElementById("new_ans_but_false").disabled = true
+            }
+            var height = 400/amount
+            var ans = document.getElementById("answers")
+            var ans_new = document.createElement("textarea")
+            for(var i=0;i<list.length;i++){
+                document.getElementById(list[i].id).style.height = `${height-12}px`
+            }
+            ans_new.placeholder = "Answer"
+            ans_new.classList.add("text")
+            ans_new.classList.add("new_answer")
+            ans_new.id = `ans${amount}`
+            ans_new.style.height = `${height-12}px`
+            ans.appendChild(ans_new)
+        }else{
+            document.getElementById("new_ans_but").disabled = true
+            document.getElementById("new_ans_but_false").disabled = true
+        }
+    }
+    function new_ans_false() {
+        var list = document.querySelectorAll(".new_answer")
+        if (list.length < 3){
+            document.getElementById("new_ans_but_del").style.display = "block"
+            var amount = list.length + 1
+            if(amount == 3){
+                document.getElementById("new_ans_but").disabled = true
+                document.getElementById("new_ans_but_false").disabled = true
+            }
+            var height = 400/amount
+            var ans = document.getElementById("answers")
+            var ans_new = document.createElement("textarea")
+            for(var i=0;i<list.length;i++){
+                document.getElementById(list[i].id).style.height = `${height-12}px`
+            }
+            ans_new.placeholder = "False Answer"
+            ans_new.required = true
+            ans_new.classList.add("text")
+            ans_new.classList.add("new_answer")
+            ans_new.id = `ans${amount}`
+            ans_new.style.height = `${height-12}px`
+            ans.appendChild(ans_new)
+        }else{
+            document.getElementById("new_ans_but").disabled = true
+            document.getElementById("new_ans_but_false").disabled = true
+        }
+    }
+    function new_ans_del() {
+        var list = document.querySelectorAll(".new_answer")
+        var elerment = document.getElementById(list[list.length-1].id).remove()
+        document.getElementById("new_ans_but").disabled = false
+        document.getElementById("new_ans_but_false").disabled = false
+        for(var i = 0; i < list.length-1;i++){
+            var height = 400/(list.length-1)
+            document.getElementById(list[i].id).style.height = `${height-12}px`;
+        }
+        if (list.length == 2){
+            document.getElementById("new_ans_but_del").style.display = "none"
+        }
+    }
+</script>
+{% endblock %}

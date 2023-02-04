@@ -3,9 +3,33 @@
 {% block main %}
     <main class="main">
         <h1>Your Sets</h1>
+        <a href="/community" class="main_button second_button" style="position:absolute;top:34.5px;right:150px;">Community<ion-icon name="globe-outline"></ion-icon></a>
+        <a href="/new" class="main_button" style="position:absolute;top:34.5px;right:20px;">New<ion-icon name="add-outline"></ion-icon></a>
         <div class="home_sets">
-            <a><img src="/static/set_icons/maths.png"><strong>Set Title</strong><p>Set Description</p></a>
-            <a><img src="/static/set_icons/comp.png"><strong>Set Title</strong><p>Set Description</p></a>
+            <a onclick="show()"><img src="/static/set_icons/maths.png"><strong>Set Title</strong><p>Set Description</p></a>
+            <a onclick="show()"><img src="/static/set_icons/comp.png"><strong>Set Title</strong><p>Set Description</p></a>
         </div>
+        <dialog class="start_set" id="start_set">
+            <h1>Set Name</h1>
+            <ion-icon onclick="document.getElementById('start_set').close()" class="close_start" name="close-outline"></ion-icon>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel neque nunc. Morbi ac ipsum tristique, tempus lacus et, pharetra lectus. Nunc tempus semper aliquet. Suspendisse eget neque ullamcorper, aliquet arcu eu, vulputate arcu.</p>
+            <h2>Revise</h2>
+            <div class="start_options">
+                <a><ion-icon name="albums-outline"></ion-icon><strong>Flashcards</strong></a>
+                <a><ion-icon name="help-outline"></ion-icon><strong>Questions</strong></a>
+                <a><ion-icon name="create-outline"></ion-icon><strong>Fill The Gaps</strong></a>
+                <a><ion-icon class="start_lock" name="lock-closed-outline"></ion-icon><ion-icon src="/static/test_icon.svg"></ion-icon><strong>Test</strong></a>
+            </div>
+            <div class="start_buttons">
+                <button class="main_button del_button" style="margin-right: 21px;">Delete<ion-icon name="trash-outline"></ion-icon></button>
+                <button class="main_button">Edit<ion-icon name="pencil-outline"></ion-icon></button>
+            </div>
+        </dialog>
     </main>
+    <script>
+        function show() {
+            document.getElementById("start_set").showModal()
+        }
+    </script>
+    <a href="/new" class="home_add"><ion-icon name="add-outline"></ion-icon></a>
 {% endblock %}

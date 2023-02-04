@@ -1,0 +1,30 @@
+{
+  "short_name": "Booogle Revise",
+  "name": "Booogle Revise 2",
+  "icons": [
+    {
+      "src": "manifest/Booogle_Logo_520.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "manifest/Booogle_Logo_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#333232",
+  "display": "minimal-ui",
+  "scope": "/",
+  "theme_color": "#333232",
+  "description": "Booogle Revise 2 is a simple app so that you can revise better.",
+  "display_override": ["window-controls-overlay"],
+  "screenshots": [
+    {
+      "src": "manifest/Booogle_Logo_520.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

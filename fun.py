@@ -35,5 +35,5 @@ def follow(username):
         "User-Agent": "Mozilla/5.0",
         "Cookie": "connect.sid="+os.getenv('sid')+""
     })
-    data = json.loads(r.text)["data"]["userByUsername"]
+    data = json.loads(r.text)["data"]["userByUsername"]["isFollowingCurrentUser"]
     return data
