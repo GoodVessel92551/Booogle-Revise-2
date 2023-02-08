@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}New{% endblock %}
+{% block main %}
+    <main class="main">
+        <div id="card" class="flashcard">
+            <h1 id="card_text">Question</h1>
+        </div>
+    </main>
+<div class="flash_buttons">
+    <button class="main_button second_button" style="margin-right: 21px;">End<ion-icon name="stop-outline"></ion-icon></button>
+    <button onclick="console.log('Next')" class="main_button next">Next<ion-icon name="arrow-forward-outline"></ion-icon></button>
+</div>
+<script>
+    var card = document.getElementById("card");
+    var spin = false;
+    const flash = (() => {
+        if(!spin){
+        if(card.style.transform != 'translateX(-50%) rotateX(180deg)'){
+            spin = true;
+            card.style.transform = 'translateX(-50%) rotateX(180deg)';
+            setTimeout(() => {
+                document.getElementById("card_text").style.transform = "scale(1,-1)";
+                document.getElementById("card_text").innerText = "Answer";
+            },300)
+            setTimeout(() => {
+                spin = false;
+            },700)
+        }else{
+            spin = true;
+            card.style.transform = 'translateX(-50%) rotateX(0deg)';
+            setTimeout(() => {
+                document.getElementById("card_text").style.transform = "scale(1)";
+                document.getElementById("card_text").innerText = "Question";
+            },300)
+            setTimeout(() => {
+                spin = false;
+            },700)
+        }
+        }
+    })
+    card.addEventListener("click",() => {
+        flash()
+    })
+
+    document.addEventListener("keyup",(e) => {
+        if(e.key == " " || e.key == "ArrowUp"){
+            flash()
+        }
+        else if(e.key == "ArrowRight"){
+            console.log("Next")
+        }
+        else if(e.key == "ArrowLeft"){
+            console.log("Back")
+        }
+    })
+</script>
+{% endblock %}

@@ -22,5 +22,19 @@
                 <a><img class="cover_img" draggable="false" src="static/set_icons/world.png" onclick="document.getElementById('world').checked = true"><input id="world" type="radio" name="cover" value="world"></a>
             </div>
         </div>
+        <div class="new_questions">
+            <div>
+                <h2>Question 1</h2>
+                <button class="main_button del_button del_question">Delete<ion-icon name="trash-outline"></ion-icon></button>
+                <input required placeholder="Question" class="new_title text">
+                <textarea style="height:150px;" required placeholder="Answer" class="new_desc text"></textarea>
+            </div>
+            <div>
+                <h2>Question 2</h2>
+                <button class="main_button del_button del_question">Delete<ion-icon name="trash-outline"></ion-icon></button>
+                <input required placeholder="Question" class="new_title text">
+                <textarea style="height:150px;" required placeholder="Answer" class="new_desc text"></textarea>
+            </div>
+        </div>
     </main>
 {% endblock %}

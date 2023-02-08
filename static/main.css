@@ -20,11 +20,11 @@
     --border2:2px solid #3D3C3C;
 }
 
-.search_div{
+.top_menu{
     position:fixed;
     left: env(titlebar-area-x, 0);
     top: env(titlebar-area-y, 0);
-    width: env(titlebar-area-width, 100%);
+    width: 100%;
     height: env(titlebar-area-height, 33px);
     background-color:var(--top_back);
     display:flex;
@@ -34,29 +34,13 @@
     app-region: drag;
 }
 
-.search{
+.top_menu span{
     transform:translateX(env(titlebar-area-height, 33px));
-    width:min(max(300px,30%),500px);
-    height:25px;
-    border:var(--border);
-    background-color:var(--add_back);
-    border-radius:4px;
-    box-sizing:border-box;
-    color:var(--text);
-    transition:.4s;
-    -webkit-app-region: no-drag;
-    app-region: no-drag;
-    padding:4px 8px 4px 8px;
+    -webkit-app-region: drag;
+    app-region: drag;
+    color:var(--text4);
 }
 
-.search:hover{
-    border-color:var(--border_hover);
-}
-
-.search:focus{
-    outline:none;
-    border-color:var(--color);
-}
 
 ::-webkit-scrollbar {
     width: 6px;
@@ -355,7 +339,6 @@ body,html{
 
 .main{
     width:90%;
-    height:100px;
     position:absolute;
     left:50%;
     top:100px;
@@ -365,6 +348,10 @@ body,html{
 .main h1{
     color:var(--text);
     font-size:40px;
+}
+
+.main h2{
+    color:var(--text);
 }
 
 .home_sets{
@@ -622,6 +609,11 @@ body,html{
     user-select:none;
 }
 
+.start_options a:focus:not(:disabled){
+    border-color:var(--color) !important;
+    outline:none;
+}
+
 .start_options a:has(.start_lock){
     filter:brightness(95%);
     cursor:not-allowed;
@@ -683,4 +675,50 @@ body,html{
 
 .close_start:hover{
     color:var(--color);
+}
+
+.del_question{
+    position:absolute;
+    top:0px;
+    right:0px;
+}
+
+.new_questions > div{
+    position:relative;
+}
+
+.flashcard{
+    width:min(90%,900px);
+    aspect-ratio:2/1;
+    background-color:var(--top_back);
+    border:var(--border);
+    box-shadow:var(--shadow);
+    position:absolute;
+    left:50%;
+    top:0px;
+    transform:translateX(-50%);
+    border-radius:6px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    transition:.4s border-color,.4s filter,.4s box-shadow,1s transform;
+}
+
+.flashcard:hover{
+    border-color:var(--border_hover);
+    filter:brightness(95%);
+    box-shadow:none;
+}
+
+.flash_buttons{
+    height:40px;
+    position:absolute;
+    right:20px;
+    bottom:20px;
+}
+
+
+.flashcard > h1{
+    user-select:none;
 }
