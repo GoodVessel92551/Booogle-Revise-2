@@ -4,8 +4,8 @@
     <main class="main">
         <h1>Edit Set</h1>
         <a class="main_button" style="position:absolute;top:34.5px;right:0px;">Save<ion-icon name="save-outline"></ion-icon></a>
-        <input required placeholder="Title" class="new_title text">
-        <textarea required placeholder="Description" class="new_desc text"></textarea>
+        <input required placeholder="Title" id="title" class="new_title text">
+        <textarea required placeholder="Description" id="desc" class="new_desc text"></textarea>
         <div class="new_images">
             <h3 style="color:var(--text)">Cover Image</h3>
             <div class="new_images_here">
@@ -37,4 +37,12 @@
             </div>
         </div>
     </main>
+<script>
+    var sets = {{sets|tojson}};
+    var keys = Object.keys(sets)
+    document.getElementById("title").value = sets["settings"]["name"]
+    document.getElementById("desc").value = sets["settings"]["desc"]
+    document.getElementById(sets["settings"]["background"]).checked = true
+
+</script>
 {% endblock %}

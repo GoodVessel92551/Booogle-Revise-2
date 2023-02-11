@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block main %}
+    <main style="display:flex;justify-content: center;flex-wrap:wrap;width:calc(min(90%,900px) + 2px);" class="main">
+        <div class="flashcard quest_card">
+            <h1>Question</h1>
+        </div><br>
+        <button class="quest_ans_but">Answer 1</button>
+        <button class="quest_ans_but">Answer 2</button>
+        <button class="quest_ans_but">Answer 3</button>
+    </main>
+<div class="flash_buttons">
+    <button class="main_button second_button" style="margin-right: 21px;">End<ion-icon name="stop-outline"></ion-icon></button></button>
+</div>
+{% endblock %}

@@ -3,7 +3,7 @@ from replit import web
 from fun import user,follow,make_dict,pro_pic
 app = Flask(__name__)
 
-test_app = {
+test_set = {
     "set_name":{
         "settings":{
             "name":"name",
@@ -16,6 +16,7 @@ test_app = {
             "question":"question",
             "answers":{
                 "ans1":"ans1",
+                "ans2":"ans2",
             }
         },
         "Q2":{
@@ -52,7 +53,7 @@ test_app = {
 @app.route("/")
 @web.authenticated_template("login.html")
 def home():
-    return render_template("home.html",name=user(),boosting=follow(user()),profile_pic=pro_pic(),sets=test_app)
+    return render_template("home.html",name=user(),boosting=follow(user()),profile_pic=pro_pic(),sets=test_set)
 
 @app.route("/new")
 @web.authenticated_template("login.html")
@@ -67,7 +68,7 @@ def new_question():
 @app.route("/edit")
 @web.authenticated_template("login.html")
 def edit():
-    return render_template("edit.html",name=user(),boosting=follow(user()),profile_pic=pro_pic())
+    return render_template("edit.html",name=user(),boosting=follow(user()),profile_pic=pro_pic(),sets=test_set["set_name"])
 
 @app.route("/sw.js", methods=["GET"])
 def sw():
@@ -80,6 +81,11 @@ def offline():
 @app.route("/flashcards")
 @web.authenticated_template("login.html")
 def flashcards():
-    return render_template("cards.html",name=user(),boosting=follow(user()),profile_pic=pro_pic())
+    return render_template("cards.html",name=user(),boosting=follow(user()),profile_pic=pro_pic(),sets=test_set["set_name"])
+
+@app.route("/question")
+@web.authenticated_template("login.html")
+def question():
+    return render_template("question.html",name=user(),boosting=follow(user()),profile_pic=pro_pic(),sets=test_set["set_name"])
     
 app.run(host="0.0.0.0",port=8080,debug=True)
