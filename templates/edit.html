@@ -9,28 +9,30 @@
         <div class="new_images">
             <h3 style="color:var(--text)">Cover Image</h3>
             <div class="new_images_here">
-                <a><img class="cover_img" draggable="false" src="static/set_icons/animals.png" onclick="document.getElementById('animals').checked = true"><input id="animals" type="radio" name="cover" value="animals" checked></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/book.png" onclick="document.getElementById('book').checked = true"><input id="book" type="radio" name="cover" value="book"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/bridge.png" onclick="document.getElementById('bridge').checked = true"><input id="bridge" type="radio" name="cover" value="bridge"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/bush.png" onclick="document.getElementById('bush').checked = true"><input id="bush" type="radio" name="cover" value="bush"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/comp.png" onclick="document.getElementById('comp').checked = true"><input id="comp" type="radio" name="cover" value="comp"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/flag.png" onclick="document.getElementById('flag').checked = true"><input id="flag" type="radio" name="cover" value="flag"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/gear.png" onclick="document.getElementById('gear').checked = true"><input id="gear" type="radio" name="cover" value="gear"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/maths.png" onclick="document.getElementById('maths').checked = true"><input id="maths" type="radio" name="cover" value="maths"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/science.png" onclick="document.getElementById('science').checked = true"><input id="science" type="radio" name="cover" value="science"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/sport.png" onclick="document.getElementById('sport').checked = true"><input id="sport" type="radio" name="cover" value="sport"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/world.png" onclick="document.getElementById('world').checked = true"><input id="world" type="radio" name="cover" value="world"></a>
+                <a><img class="cover_img" draggable="false" src="/static/set_icons/animals.png" onclick="document.getElementById('animals').checked = true"><input id="animals" type="radio" name="cover" value="animals" checked></a>
+                <a><img class="cover_img" draggable="false" src="/static/set_icons/book.png" onclick="document.getElementById('book').checked = true"><input id="book" type="radio" name="cover" value="book"></a>
+                <a><img class="cover_img" draggable="false" src="/static/set_icons/bridge.png" onclick="document.getElementById('bridge').checked = true"><input id="bridge" type="radio" name="cover" value="bridge"></a>
+                <a><img class="cover_img" draggable="false" src="/static/set_icons/bush.png" onclick="document.getElementById('bush').checked = true"><input id="bush" type="radio" name="cover" value="bush"></a>
+                <a><img class="cover_img" draggable="false" src="/static/set_icons/comp.png" onclick="document.getElementById('comp').checked = true"><input id="comp" type="radio" name="cover" value="comp"></a>
+                <a><img class="cover_img" draggable="false" src="/static/set_icons/flag.png" onclick="document.getElementById('flag').checked = true"><input id="flag" type="radio" name="cover" value="flag"></a>
+                <a><img class="cover_img" draggable="false" src="/static/set_icons/gear.png" onclick="document.getElementById('gear').checked = true"><input id="gear" type="radio" name="cover" value="gear"></a>
+                <a><img class="cover_img" draggable="false" src="/static/set_icons/maths.png" onclick="document.getElementById('maths').checked = true"><input id="maths" type="radio" name="cover" value="maths"></a>
+                <a><img class="cover_img" draggable="false" src="/static/set_icons/science.png" onclick="document.getElementById('science').checked = true"><input id="science" type="radio" name="cover" value="science"></a>
+                <a><img class="cover_img" draggable="false" src="/static/set_icons/sport.png" onclick="document.getElementById('sport').checked = true"><input id="sport" type="radio" name="cover" value="sport"></a>
+                <a><img class="cover_img" draggable="false" src="/static/set_icons/world.png" onclick="document.getElementById('world').checked = true"><input id="world" type="radio" name="cover" value="world"></a>
             </div>
         </div>
-        <div class="new_questions">
+        <div class="new_questions" id="questions">
             <div>
                 <h2>Question 1</h2>
                 <button class="main_button del_button del_question">Delete<ion-icon name="trash-outline"></ion-icon></button>
+                <span class="error_message"><ion-icon name="warning-outline"></ion-icon>This Question May Contain Rude/Inappropriate Content.</span>
                 <input required placeholder="Question" class="new_title text">
                 <textarea style="height:150px;" required placeholder="Answer" class="new_desc text"></textarea>
             </div>
             <div>
                 <h2>Question 2</h2>
+                <span class="error_message good_message"><ion-icon name="checkmark-outline"></ion-icon>This Question Is Looking Good, Well Done!</span>
                 <button class="main_button del_button del_question">Delete<ion-icon name="trash-outline"></ion-icon></button>
                 <input required placeholder="Question" class="new_title text">
                 <textarea style="height:150px;" required placeholder="Answer" class="new_desc text"></textarea>
@@ -40,9 +42,18 @@
 <script>
     var sets = {{sets|tojson}};
     var keys = Object.keys(sets)
+    var questions = document.getElementById("questions")
     document.getElementById("title").value = sets["settings"]["name"]
     document.getElementById("desc").value = sets["settings"]["desc"]
     document.getElementById(sets["settings"]["background"]).checked = true
-
+    for(var i=1;i<keys.length;i++){
+        var div = document.createElement("div")
+        var h2 = document.createElement("h2")
+        h2.innerText = sets[`Q${i}`]["question"]
+        var button = document.createElement("button")
+        button.innerText = "Delete"
+        var input = document.createElement("input")
+        var text = document.createElement("textarea")
+    }
 </script>
 {% endblock %}

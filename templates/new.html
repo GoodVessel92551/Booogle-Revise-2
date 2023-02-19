@@ -3,24 +3,36 @@
 {% block main %}
     <main class="main">
         <h1>New Set</h1>
-        <a href="/new/question" class="main_button next" style="position:absolute;top:34.5px;right:0px;">Next<ion-icon name="arrow-forward-outline"></ion-icon></a>
-        <input required placeholder="Title" class="new_title text">
-        <textarea required placeholder="Description" class="new_desc text"></textarea>
-        <div class="new_images">
-            <h3 style="color:var(--text)">Cover Image</h3>
-            <div class="new_images_here">
-                <a><img class="cover_img" draggable="false" src="static/set_icons/animals.png" onclick="document.getElementById('animals').checked = true"><input id="animals" type="radio" name="cover" value="animals" checked></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/book.png" onclick="document.getElementById('book').checked = true"><input id="book" type="radio" name="cover" value="book"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/bridge.png" onclick="document.getElementById('bridge').checked = true"><input id="bridge" type="radio" name="cover" value="bridge"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/bush.png" onclick="document.getElementById('bush').checked = true"><input id="bush" type="radio" name="cover" value="bush"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/comp.png" onclick="document.getElementById('comp').checked = true"><input id="comp" type="radio" name="cover" value="comp"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/flag.png" onclick="document.getElementById('flag').checked = true"><input id="flag" type="radio" name="cover" value="flag"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/gear.png" onclick="document.getElementById('gear').checked = true"><input id="gear" type="radio" name="cover" value="gear"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/maths.png" onclick="document.getElementById('maths').checked = true"><input id="maths" type="radio" name="cover" value="maths"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/science.png" onclick="document.getElementById('science').checked = true"><input id="science" type="radio" name="cover" value="science"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/sport.png" onclick="document.getElementById('sport').checked = true"><input id="sport" type="radio" name="cover" value="sport"></a>
-                <a><img class="cover_img" draggable="false" src="static/set_icons/world.png" onclick="document.getElementById('world').checked = true"><input id="world" type="radio" name="cover" value="world"></a>
+        <span id="len_warn" style="display:none;" class="error_message"><ion-icon name="warning-outline"></ion-icon>Unable To Create Set, Due To The Set Title/Description Being To Long/Short.</a></span>
+        <form method="post">
+            <button class="main_button next" style="position:absolute;top:34.5px;right:0px;">Next<ion-icon name="arrow-forward-outline"></ion-icon></button>
+            <input value="{{title}}" required  maxlength="80" placeholder="Title" name="title" class="new_title text">
+            <textarea maxlength="150"  placeholder="Description" name="desc" class="new_desc text">{{desc}}</textarea>
+            <div class="new_images">
+                <h3 style="color:var(--text)">Cover Image</h3>
+                <div class="new_images_here">
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/animals.png" onclick="document.getElementById('animals').checked = true"><input id="animals" type="radio" name="cover" value="animals" checked></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/book.png" onclick="document.getElementById('book').checked = true"><input id="book" type="radio" name="cover" value="book"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/bridge.png" onclick="document.getElementById('bridge').checked = true"><input id="bridge" type="radio" name="cover" value="bridge"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/bush.png" onclick="document.getElementById('bush').checked = true"><input id="bush" type="radio" name="cover" value="bush"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/comp.png" onclick="document.getElementById('comp').checked = true"><input id="comp" type="radio" name="cover" value="comp"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/flag.png" onclick="document.getElementById('flag').checked = true"><input id="flag" type="radio" name="cover" value="flag"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/gear.png" onclick="document.getElementById('gear').checked = true"><input id="gear" type="radio" name="cover" value="gear"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/maths.png" onclick="document.getElementById('maths').checked = true"><input id="maths" type="radio" name="cover" value="maths"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/science.png" onclick="document.getElementById('science').checked = true"><input id="science" type="radio" name="cover" value="science"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/sport.png" onclick="document.getElementById('sport').checked = true"><input id="sport" type="radio" name="cover" value="sport"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/world.png" onclick="document.getElementById('world').checked = true"><input id="world" type="radio" name="cover" value="world"></a>
+                </div>
             </div>
-        </div>
+        </form>
     </main>
+<script>
+    var background = {{background|tojson}};
+    var title = {{title|tojson}}
+    var desc = {{desc|tojson}}
+    if(title != "" || desc != ""){
+        document.getElementById("len_warn").style.display = "block"
+        document.getElementById(background).checked = true
+    }
+</script>
 {% endblock %}

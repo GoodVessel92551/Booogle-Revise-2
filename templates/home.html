@@ -8,25 +8,29 @@
         <div class="home_sets" id="home_sets">
         </div>
         <dialog class="start_set" id="start_set">
-            <h1>Set Name</h1>
+            <h1 id="set_title">Set Name</h1>
             <ion-icon onclick="document.getElementById('start_set').close()" class="close_start" name="close-outline"></ion-icon>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel neque nunc. Morbi ac ipsum tristique, tempus lacus et, pharetra lectus. Nunc tempus semper aliquet. Suspendisse eget neque ullamcorper, aliquet arcu eu, vulputate arcu.</p>
+            <p id="set_desc"></p>
             <h2>Revise</h2>
             <div class="start_options">
-                <a href="/flashcards"><ion-icon name="albums-outline"></ion-icon><strong>Flashcards</strong></a>
+                <a href="/flashcards" id="flashcards"><ion-icon name="albums-outline"></ion-icon><strong>Flashcards</strong></a>
                 <a><ion-icon name="help-outline"></ion-icon><strong>Questions</strong></a>
                 <a><ion-icon name="create-outline"></ion-icon><strong>Fill The Gaps</strong></a>
                 <a><ion-icon class="start_lock" name="lock-closed-outline"></ion-icon><ion-icon src="/static/test_icon.svg"></ion-icon><strong>Test</strong></a>
             </div>
             <div class="start_buttons">
-                <button class="main_button del_button" style="margin-right: 21px;">Delete<ion-icon name="trash-outline"></ion-icon></button>
+                <a id="del_button" class="main_button del_button" style="margin-right: 21px;">Delete<ion-icon name="trash-outline"></ion-icon></a>
                 <a href="/edit" class="main_button">Edit<ion-icon name="pencil-outline"></ion-icon></a>
             </div>
         </dialog>
     </main>
     <script>
-        function show() {
+        function show(name) {
             document.getElementById("start_set").showModal()
+            document.getElementById("set_title").innerText = name
+            document.getElementById("set_desc").innerText = sets[name]["settings"]["desc"]
+            document.getElementById("flashcards").href = `/flashcards/${name}`
+            document.getElementById("del_button").href = `/delete/${name}`
         }
         var sets = {{sets|tojson}};
         var sets_keys = Object.keys(sets)
@@ -36,12 +40,16 @@
             var img = document.createElement("img")
             var strong = document.createElement("strong")
             var p = document.createElement("p")
-            a.addEventListener("click",() => {
-                show()
+            a.addEventListener("click",(e) => {
+                show(e.target.id)
             })
             img.src = `/static/set_icons/${sets[sets_keys[i]]["settings"]["background"]}.png`
             strong.innerText = sets[sets_keys[i]]["settings"]["name"]
             p.innerText = sets[sets_keys[i]]["settings"]["desc"]
+            a.id = sets[sets_keys[i]]["settings"]["name"]
+            strong.id = sets[sets_keys[i]]["settings"]["name"]
+            img.id = sets[sets_keys[i]]["settings"]["name"]
+            p.id = sets[sets_keys[i]]["settings"]["name"]
             a.appendChild(img)
             a.appendChild(strong)
             a.appendChild(p)

@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% block title %}New{% endblock %}
+{% block title %}Flashcards{% endblock %}
 {% block main %}
     <main style="display:flex;justify-content: center;flex-wrap:wrap;width:calc(min(90%,900px) + 2px);" class="main">
         <div id="card" class="flashcard">
-            <h1 id="card_text">Question</h1>
+            <h1 id="card_text">Questions</h1>
         </div>
     </main>
 <div class="flash_buttons">
@@ -20,9 +20,9 @@
     var card_text = document.getElementById("card_text" )
     const next = (() => {
         if(!spin){
-            if(card.style.transform == 'translateX(-50%) rotateX(180deg)'){
+            if(card.style.transform == 'rotateX(180deg)'){
                 card.style.transition = "0s";
-                card.style.transform = 'translateX(-50%) rotateX(0deg)';
+                card.style.transform = 'rotateX(0deg)';
                 card_text.style.transform = "scale(1)"
                 setTimeout(() => {
                     card.style.transition = ".4s border-color,.4s filter,.4s box-shadow,1s transform"
@@ -49,9 +49,9 @@
     }})
     const flash = (() => {
         if(!spin){
-        if(card.style.transform != 'translateX(-50%) rotateX(180deg)'){
+        if(card.style.transform != 'rotateX(180deg)'){
             spin = true;
-            card.style.transform = 'translateX(-50%) rotateX(180deg)';
+            card.style.transform = 'rotateX(180deg)';
             setTimeout(() => {
                 card_text.style.transform = "scale(1,-1)";
                 card_text.innerText = ans;
@@ -61,7 +61,7 @@
             },700)
         }else{
             spin = true;
-            card.style.transform = 'translateX(-50%) rotateX(0deg)';
+            card.style.transform = 'rotateX(0deg)';
             setTimeout(() => {
                 card_text.style.transform = "scale(1)"
                 card_text.innerText = quest;

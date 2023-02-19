@@ -3,17 +3,48 @@
 {% block main %}
     <main class="main">
         <h1>New Question</h1>
-        <a href="/new" class="main_button next" style="position:absolute;top:34.5px;right:0px;">Next<ion-icon name="arrow-forward-outline"></ion-icon></a>
-        <a href="/new" class="main_button second_button" style="position:absolute;top:34.5px;right:118.64px;">Finish<ion-icon name="checkmark-done-outline"></ion-icon></a>
-        <input placeholder="Question" required class="new_title text">
-        <div id="answers">
-            <textarea id="ans1" required placeholder="Answer" class="text new_answer"></textarea>
-        </div>
-        <button onclick="new_ans()" id="new_ans_but" style="float:right;" class="main_button">New Answer<ion-icon name="add-outline"></ion-icon></button>
-        <button onclick="new_ans_false()" id="new_ans_but_false" style="float:right;margin-right:8px;" class="main_button second_button">New False Answer<ion-icon name="add-outline"></ion-icon></button>
-        <button onclick="new_ans_del()" id="new_ans_but_del" style="display:none;float:right;margin-right:8px;" class="main_button del_button">Delete Last Answer<ion-icon name="trash-outline"></ion-icon></button>
+        <form id="gen_form" method="post" action="/new/question/generate">
+                <span id="gen" class="error_message good_message"><ion-icon name="build-outline"></ion-icon>Use AI To Generate This Answer!<a href="/ai">Learn More</a><button>Generate Now</button></span>
+            <span id="warn" style="display:none;" class="error_message"><ion-icon name="warning-outline"></ion-icon>Unable To Generate, Due To Question Possibly Containing Rude Text.</a></span>
+            <span id="len_warn" style="display:none;" class="error_message warn_message"><ion-icon name="warning-outline"></ion-icon>Unable To Generate, Due To Question Not Containing The Required 3 Words.</a></span>
+            <input id="quest" autocomplete="off" placeholder="Question" value="{{quest}}" name="quest" required class="new_title text">
+            </form>
+            <form method="post">
+            <input id="quest2" hidden autocomplete="off" placeholder="Question" value="{{quest}}" name="quest" required class="new_title text">
+            <button name="button" value="next" class="main_button next" style="position:absolute;top:34.5px;right:0px;">Next<ion-icon name="arrow-forward-outline"></ion-icon></button>
+            <button name="button" value="finish" class="main_button second_button" style="position:absolute;top:34.5px;right:118.64px;">Finish<ion-icon name="checkmark-done-outline"></ion-icon></button>
+            <div id="answers">
+                <textarea required name="ans1" id="ans1" placeholder="Answer" class="text new_answer">{{ans}}</textarea>
+            </div>
+            <button onclick="new_ans()" type="button" id="new_ans_but" style="float:right;font-size:14px;" class="main_button">New Answer</button>
+            <button onclick="new_ans_false()" type="button" id="new_ans_but_false" style="float:right;margin-right:8px;;font-size:14px;" class="main_button second_button">New False Answer</ion-icon></button>
+            <button onclick="new_ans_del()" type="button" id="new_ans_but_del" style="display:none;float:right;margin-right:8px;;font-size:14px;" class="main_button del_button">Delete Last Answer</ion-icon></button
+        </form>
+        </form>
     </main>
 <script>
+    setInterval(() => {
+        var quest = document.getElementById("quest")
+        var quest2 = document.getElementById("quest2")
+        if(quest.value != quest2.value){
+            quest2.value = quest.value
+        }
+    },500)
+    var rude = {{rude|tojson}};
+    var len = {{len|tojson}};
+    if(rude){
+        document.getElementById("gen").style.display = "none";
+        document.getElementById("warn").style.display = "block";
+    }
+    if(len){
+        document.getElementById("gen").style.display = "none";
+        document.getElementById("len_warn").style.display = "block";
+    }
+    document.getElementById("quest").addEventListener("keyup",() => {
+        document.getElementById("warn").style.display = "none";
+        document.getElementById("len_warn").style.display = "none";
+        document.getElementById("gen").style.display = "block";
+    })
     function new_ans() {
         var list = document.querySelectorAll(".new_answer")
         if (list.length < 3){
@@ -33,6 +64,7 @@
             ans_new.classList.add("text")
             ans_new.classList.add("new_answer")
             ans_new.id = `ans${amount}`
+            ans_new.name = `ans${amount}`
             ans_new.style.height = `${height-12}px`
             ans.appendChild(ans_new)
         }else{

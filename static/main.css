@@ -4,10 +4,15 @@
     --border:1px solid #454545;
     --border_hover:#636363;
     --color:#00bb00;
+    --color1:#009600;
     --color2:#236B23;
     --color3:#009400;
-    --red:#901111;
-    --red_border:#c91313;
+    --red1:#850000;
+    --red2:#810000;
+    --green1:#006e00;
+    --green2:#005d00;
+    --orange1:#b57213;
+    --orange2:#915908;
     --shadow:0px 0px 8px rgba(0,0,0,0.2);
     --shadow2:0px 0px 16px rgba(0,0,0,0.4);
     --add_back:#3D3C3C;
@@ -131,10 +136,10 @@ body,html{
     right:60px;
     top:50%;
     transform:translateY(-50%);
-    background:var(--color);
+    background: linear-gradient(112deg, var(--color), var(--color1)) !important;
+    box-shadow: 0px 0px 10px var(--green1);
     padding:4px 8px 4px 8px;
     border-radius:4px;
-    box-shadow: 0px 0px 5px var(--color);
     cursor:pointer;
     transition:.4s;
     color:var(--text2);
@@ -358,6 +363,8 @@ body,html{
     width:100%;
     display:flex;
     gap:16px;
+    overflow-x:scroll;
+    padding-bottom:10px;
 }
 
 .home_sets a{
@@ -436,11 +443,14 @@ body,html{
     color:var(--text2);
     transition:.4s;
     text-decoration:none;
+    background: linear-gradient(112deg, var(--color), var(--color1)) !important;
+    box-shadow: 0px 0px 6px var(--color);
 }
 
 .main_button:not(:disabled):hover{
     transform:translateY(1px);
-    box-shadow:none;
+    box-shadow: 0px 0px 3px var(--color);
+    filter:brightness(95%);
 }
 
 .main_button:focus{
@@ -453,8 +463,13 @@ body,html{
 }
 
 .del_button{
-    background:var(--red) !important;
+    background:linear-gradient(112deg, var(--red1), var(--red2)) !important;
+    box-shadow:0px 0px 6px var(--red1);
     color:var(--text) !important;
+}
+
+.del_button:hover{
+    box-shadow: 0px 0px 4px var(--red1) !important;
 }
 
 .del_button ion-icon{
@@ -479,12 +494,17 @@ body,html{
 }
 
 .second_button{
-    background:var(--color2) !important;
+    background: linear-gradient(112deg, var(--green1), var(--green2)) !important;
+    box-shadow: 0px 0px 6px var(--green1);
     color:var(--text) !important;
 }
 
 .second_button ion-icon{
     color:var(--text);
+}
+
+.second_button:hover{
+    box-shadow: 0px 0px 4px var(--green1) !important;
 }
 
 .text{
@@ -496,7 +516,7 @@ body,html{
     margin-bottom:8px;
     resize:none;
     color:var(--text);
-    transition:.4s;
+    transition:.4s border-color, .4s filter;
     box-sizing:border-box;
 }
 
@@ -699,6 +719,7 @@ body,html{
     align-items:center;
     cursor:pointer;
     transition:.4s border-color,.4s filter,.4s box-shadow,1s transform;
+    padding:32px;
 }
 
 .flashcard:not(.quest_card):hover,.quest_ans_but:hover{
@@ -717,6 +738,7 @@ body,html{
 
 .flashcard > h1{
     user-select:none;
+    text-align:center;
 }
 
 .quest_card{
@@ -739,4 +761,92 @@ body,html{
     transition:.4s border-color,.4s filter,.4s box-shadow,1s transform;
     color:var(--text);
     font-size:16px;
+}
+
+.error_message{
+    width:100%;
+    height:40px;
+    background:linear-gradient(112deg, var(--red1), var(--red2)) !important;
+    box-shadow:0px 0px 10px var(--red1);
+    display:block;
+    border-radius:4px;
+    border:none;
+    box-sizing:border-box;
+    line-height:28px;
+    color:var(--text);
+    margin:8px 0px 8px 0px;
+    padding:5px 5px 5px 8px;
+    user-select:none;
+}
+
+.error_message ion-icon{
+    position:relative;
+    top:3px;
+    padding-right:8px;
+    font-size:19px;
+}
+
+.good_message{
+    background: linear-gradient(112deg, var(--green1), var(--green2)) !important;
+    border: none !important;
+    box-shadow: 0px 0px 10px var(--green1);
+}
+
+
+.good_message > button{
+    float: right;
+    height: 28px;
+    box-sizing: border-box;
+    background: transparent;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    color: var(--text);
+    font-weight: bold;
+    font-size: 15px;
+    transition: .4s;
+    padding: 4px 10px;
+}
+
+.good_message > button:hover{
+    background: #005200;
+    box-shadow: 0px 0px 4px rgb(0 0 0 / 30%);
+}
+
+.good_message > a{
+    color:var(--text);
+    margin-left:8px;
+    transition:.4s;
+}
+
+.good_message > a:hover{
+    filter:brightness(90%);
+}
+
+.warn_message > button{
+    float:right;
+    height:28px;
+    box-sizing:border-box;
+    background:none;
+    border:none;
+    cursor:pointer;
+    color:var(--text);
+    font-weight:bold;
+    font-size:15px;
+    transition:.4s;
+    padding:4px 10px;
+    border-bottom:1px solid transparent;
+}
+
+.warn_message{
+    background: linear-gradient(112deg, var(--orange1), var(--orange2)) !important;
+    border: none !important;
+    box-shadow: 0px 0px 10px var(--orange1);
+}
+
+.warn_message ion-icon{
+    position:relative;
+    top:3px;
+    padding-right:8px;
+    font-size:19px;
 }

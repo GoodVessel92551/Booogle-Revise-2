@@ -1,8 +1,17 @@
 from replit import web
 from flask import request
 import requests,os,json
+from better_profanity import profanity
+from ai.generation import generation
+from ai.moderation import moderation
 
-def user():
+def gen(prompt):
+    return generation.prompt(prompt)
+
+def mod(text):
+    return moderation.prompt(text)
+
+def username():
     return web.auth.name
 
 def pro_pic():
@@ -12,6 +21,10 @@ def make_dict(dictionary):
     list = dict(dictionary)
     for i in dictionary:
         list[i] = dict(dictionary[i])
+        for j in list[i]:
+            list[i][j] = dict(dictionary[i][j])
+            if "answers" in list[i][j].keys():
+                list[i][j]["answers"] = dict(dictionary[i][j]["answers"])
     return list
 
 def follow(username):
